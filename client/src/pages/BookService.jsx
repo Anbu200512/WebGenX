@@ -23,8 +23,8 @@ setMessage("");
 
 try{
 
-const res = await fetch("http://localhost:5000/api/service-requests",{
-method:"POST",
+const res = await fetch(`${import.meta.env.VITE_API_URL}/api/service-requests`,{
+    method:"POST",
 headers:{
 "Content-Type":"application/json"
 },

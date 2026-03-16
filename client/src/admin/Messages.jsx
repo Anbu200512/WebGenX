@@ -9,7 +9,7 @@ const [selectedMessage, setSelectedMessage] = useState(null);
 
 const fetchMessages = async () => {
 
-const res = await fetch("http://localhost:5000/api/messages");
+const res = await fetch(`${import.meta.env.VITE_API_URL}/api/messages`);
 const data = await res.json();
 setMessages(data);
 
@@ -21,8 +21,8 @@ fetchMessages();
 
 const acceptMessage = async (id) => {
 
-await fetch(`http://localhost:5000/api/messages/accept/${id}`, {
-method: "PUT"
+await fetch(`${import.meta.env.VITE_API_URL}/api/messages/accept/${id}`, {
+    method: "PUT"
 });
 
 fetchMessages();
@@ -31,8 +31,8 @@ fetchMessages();
 
 const deleteMessage = async (id) => {
 
-await fetch(`http://localhost:5000/api/messages/${id}`, {
-method: "DELETE"
+await fetch(`${import.meta.env.VITE_API_URL}/api/messages/${id}`, {
+    method: "DELETE"
 });
 
 fetchMessages();

@@ -13,8 +13,7 @@ function ManageServices() {
 
   const fetchServices = async () => {
 
-    const res = await axios.get("http://localhost:5000/api/services");
-
+const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/services`);
     setServices(res.data);
 
   };
@@ -29,7 +28,7 @@ function ManageServices() {
 
     if (editId) {
 
-      await axios.put(`http://localhost:5000/api/services/${editId}`, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/services/${editId}`, {
         title,
         description,
         icon
@@ -39,8 +38,8 @@ function ManageServices() {
 
     } else {
 
-      await axios.post("http://localhost:5000/api/services", {
-        title,
+await axios.post(`${import.meta.env.VITE_API_URL}/api/services`, {
+          title,
         description,
         icon
       });
@@ -71,8 +70,7 @@ function ManageServices() {
 
   const deleteService = async (id) => {
 
-    await axios.delete(`http://localhost:5000/api/services/${id}`);
-
+await axios.delete(`${import.meta.env.VITE_API_URL}/api/services/${id}`);
     fetchServices();
 
   };

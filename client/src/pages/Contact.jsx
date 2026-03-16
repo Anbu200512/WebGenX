@@ -16,8 +16,8 @@ e.preventDefault();
 
 try{
 
-await fetch("http://localhost:5000/api/messages",{
-method:"POST",
+await fetch(`${import.meta.env.VITE_API_URL}/api/messages`,{
+    method:"POST",
 headers:{ "Content-Type":"application/json" },
 body:JSON.stringify(form)
 });
@@ -185,7 +185,7 @@ or project discussions.
 
 <div>
 <p className="font-semibold">Phone</p>
-<p className="text-gray-300">+91 XXXXX XXXXX</p>
+<p className="text-gray-300">+91 6374114513</p>
 </div>
 
 </div>
@@ -193,7 +193,7 @@ or project discussions.
 {/* WHATSAPP */}
 
 <a
-href="https://wa.me/91XXXXXXXXXX"
+href="https://wa.me/916374114513"
 target="_blank"
 className="flex items-center gap-4 border-b border-white/20 pb-4 hover:text-green-400 transition"
 
@@ -213,7 +213,7 @@ className="flex items-center gap-4 border-b border-white/20 pb-4 hover:text-gree
 {/* INSTAGRAM */}
 
 <a
-href="https://instagram.com/webgenx"
+href="https://instagram.com/webgen_x"
 target="_blank"
 className="flex items-center gap-4 border-b border-white/20 pb-4 hover:text-pink-400 transition"
 
@@ -225,7 +225,7 @@ className="flex items-center gap-4 border-b border-white/20 pb-4 hover:text-pink
 
 <div>
 <p className="font-semibold">Instagram</p>
-<p className="text-gray-300">@webgenx</p>
+<p className="text-gray-300">@webgen_x</p>
 </div>
 
 </a>

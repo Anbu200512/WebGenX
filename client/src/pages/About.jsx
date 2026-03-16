@@ -467,7 +467,7 @@ to grow your business.
         </p>
 
         <p className="mt-6 font-semibold">
-          — Anbumani, Founder of WebGenX
+          — Founder of WebGenX
         </p>
 
       </div>

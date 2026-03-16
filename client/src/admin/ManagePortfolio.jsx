@@ -18,7 +18,7 @@ const [editingId, setEditingId] = useState(null);
 
 const fetchProjects = async () => {
 
-const res = await fetch("http://localhost:5000/api/portfolio");
+const res = await fetch(`${import.meta.env.VITE_API_URL}/api/portfolio`);
 const data = await res.json();
 setProjects(data);
 
@@ -34,7 +34,7 @@ e.preventDefault();
 
 if (editingId) {
 
-await fetch(`http://localhost:5000/api/portfolio/${editingId}`, {
+await fetch(`${import.meta.env.VITE_API_URL}/api/portfolio/${editingId}`, {
 method: "PUT",
 headers: {
 "Content-Type": "application/json"
@@ -44,7 +44,7 @@ body: JSON.stringify(form)
 
 } else {
 
-await fetch("http://localhost:5000/api/portfolio", {
+await fetch(`${import.meta.env.VITE_API_URL}/api/portfolio`, {
 method: "POST",
 headers: {
 "Content-Type": "application/json"
@@ -70,7 +70,7 @@ fetchProjects();
 
 const deleteProject = async (id) => {
 
-await fetch(`http://localhost:5000/api/portfolio/${id}`, {
+await fetch(`${import.meta.env.VITE_API_URL}/api/portfolio/${id}`, {
 method: "DELETE"
 });
 

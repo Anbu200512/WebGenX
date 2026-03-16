@@ -22,10 +22,10 @@ const fetchStats = async()=>{
 
 try{
 
-const services = await fetch("http://localhost:5000/api/services");
-const portfolio = await fetch("http://localhost:5000/api/portfolio");
-const users = await fetch("http://localhost:5000/api/users");
-const messages = await fetch("http://localhost:5000/api/messages");
+const services = await fetch(`${import.meta.env.VITE_API_URL}/api/services`);
+const portfolio = await fetch(`${import.meta.env.VITE_API_URL}/api/portfolio`);
+const users = await fetch(`${import.meta.env.VITE_API_URL}/api/users`);
+const messages = await fetch(`${import.meta.env.VITE_API_URL}/api/messages`);
 
 const servicesData = await services.json();
 const portfolioData = await portfolio.json();

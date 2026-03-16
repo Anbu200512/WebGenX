@@ -9,7 +9,7 @@ const [selectedRequest,setSelectedRequest] = useState(null);
 
 const fetchRequests = ()=>{
 
-fetch("http://localhost:5000/api/service-requests")
+fetch(`${import.meta.env.VITE_API_URL}/api/service-requests`)
 .then(res=>res.json())
 .then(data=>setRequests(data));
 
@@ -21,8 +21,8 @@ fetchRequests();
 
 const acceptRequest = async(id)=>{
 
-await fetch(`http://localhost:5000/api/service-requests/${id}/accept`,{
-method:"PUT"
+await fetch(`${import.meta.env.VITE_API_URL}/api/service-requests/${id}/accept`,{
+    method:"PUT"
 });
 
 fetchRequests();
@@ -31,8 +31,8 @@ fetchRequests();
 
 const deleteRequest = async(id)=>{
 
-await fetch(`http://localhost:5000/api/service-requests/${id}`,{
-method:"DELETE"
+await fetch(`${import.meta.env.VITE_API_URL}/api/service-requests/${id}`,{
+    method:"DELETE"
 });
 
 fetchRequests();

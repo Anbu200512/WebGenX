@@ -21,7 +21,7 @@ const [projects, setProjects] = useState([]);
 
 useEffect(() => {
 
-fetch("http://localhost:5000/api/portfolio")
+fetch(`${import.meta.env.VITE_API_URL}/api/portfolio`)
 .then((res) => res.json())
 .then((data) => setProjects(data))
 .catch((err) => console.log(err));
