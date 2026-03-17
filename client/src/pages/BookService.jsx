@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function BookService() {
 
@@ -15,6 +15,16 @@ description:""
 const [loading,setLoading] = useState(false);
 const [message,setMessage] = useState("");
 
+/* AUTO HIDE MESSAGE */
+
+useEffect(()=>{
+if(message){
+setTimeout(()=>setMessage(""),3000);
+}
+},[message]);
+
+/* SUBMIT */
+
 const handleSubmit = async(e)=>{
 
 e.preventDefault();
@@ -24,14 +34,14 @@ setMessage("");
 try{
 
 const res = await fetch(`${import.meta.env.VITE_API_URL}/api/service-requests`,{
-    method:"POST",
+method:"POST",
 headers:{
 "Content-Type":"application/json"
 },
 body:JSON.stringify(form)
 });
 
-const data = await res.json();
+/* ✅ SUCCESS CHECK FIRST */
 
 if(res.ok){
 
@@ -49,12 +59,22 @@ description:""
 
 }else{
 
+/* ✅ SAFE JSON PARSE */
+
+let data;
+try{
+data = await res.json();
+}catch{
+data = { error: "Something went wrong" };
+}
+
 setMessage(data.error || "❌ Failed to submit request");
 
 }
 
 }catch(err){
 
+console.log(err);
 setMessage("⚠️ Server error. Please try again.");
 
 }
@@ -86,10 +106,8 @@ backgroundImage:
 <div className="relative z-10 w-full max-w-3xl">
 
 <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-white">
-
 <span className="text-white">Book</span>{" "}
 <span className="text-[#F68048]">Service</span>
-
 </h2>
 
 <form
@@ -137,35 +155,15 @@ value={form.websiteType}
 onChange={(e)=>setForm({...form,websiteType:e.target.value})}
 required
 >
-
 <option value="" className="text-black bg-white">
 Select Website Type
 </option>
-
-<option className="text-black bg-white">
-Business Website
-</option>
-
-<option className="text-black bg-white">
-E-commerce Website
-</option>
-
-<option className="text-black bg-white">
-Portfolio Website
-</option>
-
-<option className="text-black bg-white">
-Startup Landing Page
-</option>
-
-<option className="text-black bg-white">
-Blog Website
-</option>
-
-<option className="text-black bg-white">
-Custom Web Application
-</option>
-
+<option className="text-black bg-white">Business Website</option>
+<option className="text-black bg-white">E-commerce Website</option>
+<option className="text-black bg-white">Portfolio Website</option>
+<option className="text-black bg-white">Startup Landing Page</option>
+<option className="text-black bg-white">Blog Website</option>
+<option className="text-black bg-white">Custom Web Application</option>
 </select>
 
 {/* BUDGET */}
@@ -175,23 +173,12 @@ className="w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white f
 value={form.budget}
 onChange={(e)=>setForm({...form,budget:e.target.value})}
 >
-
 <option value="" className="text-black bg-white">
 Estimated Budget
 </option>
-
-<option className="text-black bg-white">
-₹5k - ₹10k
-</option>
-
-<option className="text-black bg-white">
-₹10k - ₹25k
-</option>
-
-<option className="text-black bg-white">
-₹25k - ₹50k
-</option>
-
+<option className="text-black bg-white">₹5k - ₹10k</option>
+<option className="text-black bg-white">₹10k - ₹25k</option>
+<option className="text-black bg-white">₹25k - ₹50k</option>
 </select>
 
 {/* TIMELINE */}
@@ -201,23 +188,12 @@ className="w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white f
 value={form.timeline}
 onChange={(e)=>setForm({...form,timeline:e.target.value})}
 >
-
 <option value="" className="text-black bg-white">
 Project Timeline
 </option>
-
-<option className="text-black bg-white">
-1 Week
-</option>
-
-<option className="text-black bg-white">
-2 Weeks
-</option>
-
-<option className="text-black bg-white">
-1 Month
-</option>
-
+<option className="text-black bg-white">1 Week</option>
+<option className="text-black bg-white">2 Weeks</option>
+<option className="text-black bg-white">1 Month</option>
 </select>
 
 {/* DESCRIPTION */}
@@ -232,7 +208,7 @@ onChange={(e)=>setForm({...form,description:e.target.value})}
 {/* MESSAGE */}
 
 {message && (
-<p className="text-center text-sm text-white">
+<p className="text-center text-sm text-white font-semibold">
 {message}
 </p>
 )}
@@ -244,9 +220,7 @@ type="submit"
 disabled={loading}
 className="w-full bg-[#F68048] hover:bg-[#ff7d45] text-white py-3 rounded-lg font-semibold transition shadow-lg hover:shadow-xl disabled:opacity-60"
 >
-
 {loading ? "Submitting..." : "Submit Request"}
-
 </button>
 
 </form>
